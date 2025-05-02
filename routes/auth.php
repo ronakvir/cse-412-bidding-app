@@ -27,6 +27,12 @@ Route::middleware('guest')->group(function () {
     
     Route::post('/bidding', [CreateBidController::class, 'store'])->name('bidding.store');
 
+    Route::delete('/admin/delete-all', [BiddingController::class, 'deleteAllData'])
+     ->name('admin.deleteAll');
+
+    Route::post('/admin/seed', [BiddingController::class, 'seedTables'])
+        ->name('admin.seed');
+
     Route::get('/listing/{id}', [BiddingController::class, 'show'])->name('listing.show');
     Route::post('/listing/{id}/bid', [BiddingController::class, 'placeBid'])->name('listing.bid');
 
