@@ -18,7 +18,7 @@ class HomeController extends Controller
     /**
      * Get current active bids
      */
-    public function create(Request $request): Response
+    public function getInitialHomePageData(Request $request): Response
     {
         $bidding_data = BiddingData::where('expires_at', '>', Carbon::now())
         ->get()

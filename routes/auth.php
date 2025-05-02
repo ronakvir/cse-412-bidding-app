@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\Bidding\CreateBidController;
 use App\Http\Controllers\Bidding\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,8 +21,13 @@ Route::middleware('guest')->group(function () {
     Route::get('login', [AuthenticatedSessionController::class, 'create'])
         ->name('login');
 
-    Route::get('home', [HomeController::class, 'create'])
+    Route::get('home', [HomeController::class, 'getInitialHomePageData'])
         ->name('home');
+
+    Route::get('create-bid', [CreateBidController::class, 'go'])
+        ->name('bidding.create');
+    
+    Route::post('/bidding', [CreateBidController::class, 'store'])->name('bidding.store');
 
     Route::post('login', [AuthenticatedSessionController::class, 'store']);
 
