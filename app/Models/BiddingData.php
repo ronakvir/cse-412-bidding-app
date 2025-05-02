@@ -14,4 +14,8 @@ class BiddingData extends Model
         'expires_at',
         'username',
     ];
+
+    public function bids() {
+        return $this->hasMany(Bid::class);
+    }
 }

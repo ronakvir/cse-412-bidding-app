@@ -10,6 +10,7 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\Bidding\CreateBidController;
 use App\Http\Controllers\Bidding\HomeController;
+use App\Http\Controllers\Bidding\BiddingController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -28,6 +29,10 @@ Route::middleware('guest')->group(function () {
         ->name('bidding.create');
     
     Route::post('/bidding', [CreateBidController::class, 'store'])->name('bidding.store');
+
+    Route::get('/listing/{id}', [BiddingController::class, 'show'])->name('listing.show');
+    Route::post('/listing/{id}/bid', [BiddingController::class, 'placeBid'])->name('listing.bid');
+
 
     Route::post('login', [AuthenticatedSessionController::class, 'store']);
 

@@ -1,6 +1,7 @@
-import { Head } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { formatDistanceToNow } from 'date-fns';
 
 type Bidding = {
@@ -20,7 +21,13 @@ export default function Home({ activeBiddings }: HomeProps) {
         <>
             <Head title="Home" />
             <div className="container mx-auto px-4 py-8">
-                <h1 className="text-3xl font-bold mb-6">Active Biddings</h1>
+                <div className="flex items-center justify-between mb-6">
+                    <h1 className="text-3xl font-bold">Active Biddings</h1>
+                    <Link href="/create-bid">
+                        <Button>Create New Bid</Button>
+                    </Link>
+                </div>
+
                 {activeBiddings.length === 0 ? (
                     <p className="text-muted-foreground">No active biddings available right now.</p>
                 ) : (

@@ -1,4 +1,4 @@
-import { useForm, Head } from '@inertiajs/react';
+import { useForm, Head, Link } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -24,7 +24,13 @@ export default function CreateBid() {
         <>
             <Head title="Create Bid" />
             <div className="max-w-xl mx-auto px-4 py-10">
-                <h1 className="text-2xl font-bold mb-6">Create a New Bid</h1>
+                <div className="flex items-center justify-between mb-6">
+                    <h1 className="text-2xl font-bold">Create a New Bid</h1>
+                    <Link href="/home">
+                        <Button variant="outline">← Back to Home</Button>
+                    </Link>
+                </div>
+
                 <form onSubmit={submit} className="space-y-6">
                     <div>
                         <Label htmlFor="name">Item Name</Label>
