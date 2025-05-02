@@ -25,7 +25,7 @@ class BiddingController extends Controller {
             ]);
 
         return Inertia::render('bidding/listing', [
-            'listing' => [
+            'bidding' => [
                 'id' => $listing->id,
                 'name' => $listing->name,
                 'currentPrice' => $listing->current_price,

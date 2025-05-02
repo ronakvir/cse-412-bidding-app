@@ -1,4 +1,4 @@
-import { Head, useForm } from '@inertiajs/react';
+import { Head, useForm, Link } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
 import { formatDistanceToNow } from 'date-fns';
 import { Input } from '@/components/ui/input';
@@ -6,13 +6,7 @@ import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import InputError from '@/components/input-error';
 
-type Listing = {
-    id: number;
-    name: string;
-    currentPrice: number;
-    expiresAt: string;
-    username: string;
-};
+import { Bidding } from './types';
 
 type Bid = {
     username: string;
@@ -21,11 +15,11 @@ type Bid = {
 };
 
 interface Props {
-    listing: Listing;
+    bidding: Bidding;
     bids: Bid[];
 }
 
-export default function ListingPage({ listing, bids }: Props) {
+export default function ListingPage({ bidding, bids }: Props) {
     const { data, setData, post, processing, errors, reset } = useForm({
         username: '',
         price: '',
@@ -33,21 +27,26 @@ export default function ListingPage({ listing, bids }: Props) {
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
-        post(route('listing.bid', listing.id), {
+        post(route('listing.bid', bidding.id), {
             onSuccess: () => reset(),
         });
     };
 
     return (
         <>
-            <Head title={listing.name} />
+            <Head title={bidding.name} />
             <div className="max-w-2xl mx-auto px-4 py-10 space-y-8">
                 <div>
-                    <h1 className="text-3xl font-bold">{listing.name}</h1>
-                    <p className="text-muted-foreground">Listed by {listing.username}</p>
-                    <p className="text-lg font-semibold mt-2">Current Price: ${listing.currentPrice.toFixed(2)}</p>
+                    <div className="flex items-center justify-between mb-6">
+                        <h1 className="text-2xl font-bold">{bidding.name}</h1>
+                        <Link href="/">
+                            <Button variant="outline">← Back to Home</Button>
+                        </Link>
+                    </div>
+                    <p className="text-muted-foreground">Listed by {bidding.username}</p>
+                    <p className="text-lg font-semibold mt-2">Current Price: ${bidding.currentPrice.toFixed(2)}</p>
                     <p className="text-sm text-red-600">
-                        Expires {formatDistanceToNow(new Date(listing.expiresAt), { addSuffix: true })}
+                        Expires {formatDistanceToNow(new Date(bidding.expiresAt), { addSuffix: true })}
                     </p>
                 </div>
 

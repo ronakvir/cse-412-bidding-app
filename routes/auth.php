@@ -22,9 +22,6 @@ Route::middleware('guest')->group(function () {
     Route::get('login', [AuthenticatedSessionController::class, 'create'])
         ->name('login');
 
-    Route::get('home', [HomeController::class, 'getInitialHomePageData'])
-        ->name('home');
-
     Route::get('create-bid', [CreateBidController::class, 'go'])
         ->name('bidding.create');
     
